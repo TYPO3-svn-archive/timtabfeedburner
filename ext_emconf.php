@@ -2,9 +2,9 @@
 
 ########################################################################
 # Extension Manager/Repository config file for ext: "timtab_feedburner"
-# 
+#
 # Auto generated 09-10-2007 15:57
-# 
+#
 # Manual updates:
 # Only the data in the array - anything else is removed by next write
 ########################################################################
@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = Array (
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'alpha',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => 0,
 	'createDirs' => '',
