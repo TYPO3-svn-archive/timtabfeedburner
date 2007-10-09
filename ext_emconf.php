@@ -2,9 +2,9 @@
 
 ########################################################################
 # Extension Manager/Repository config file for ext: "timtab_feedburner"
-# 
+#
 # Auto generated 09-10-2007 12:01
-# 
+#
 # Manual updates:
 # Only the data in the array - anything else is removed by next write
 ########################################################################
@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = Array (
 	'author' => 'Ingo Renner',
 	'author_email' => 'typo3@ingo-renner.com',
 	'shy' => '',
-	'dependencies' => 'tt_news',
+	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
