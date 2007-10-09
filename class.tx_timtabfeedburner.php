@@ -22,7 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
 /**
  * TIMTAB Feedburner
  *
@@ -38,9 +37,11 @@ class tx_timtabfeedburner {
 	 * checks whether the current page is a feed and redirects to a
 	 * feedburner URL if that's the case
 	 *
+	 * @param	array	array of parameters
+	 * @param	tslib_fe	parent TSFE object
 	 * @return	void
 	 */
-	function burnIfFeed(&$params) {
+	function burnIfFeed(&$params, &$pObj) {
 		$this->pageConfig = $this->getConfig();
 
 		if(trim($this->pageConfig['feedburnerURL']) != '' && !$this->isFeedburnerClient()) {
@@ -56,10 +57,30 @@ class tx_timtabfeedburner {
 	function getConfig() {
 		$typeNum = t3lib_div::_GET('type');
 		$setup   = $GLOBALS['TSFE']->tmpl->setup;
+		$pageId  = $GLOBALS['TSFE']->id;
 
-		$pageTypeName = $setup['types.'][$typeNum];
+			// check whether it's not the default view and whether the page was cached
+		if($typeNum > 0 && !isset($setup['types.'])) {
+			echo ' cached ';
+				// cached page, recompile the TS setup
+			require_once(PATH_t3lib.'class.t3lib_tsparser_ext.php');
+			require_once(PATH_t3lib.'class.t3lib_page.php');
 
-		return $setup[$pageTypeName.'.'];
+			$template = t3lib_div::makeInstance('t3lib_tsparser_ext');
+			$template->tt_track = 0;
+			$template->init();
+
+			$sysPage  = t3lib_div::makeInstance('t3lib_pageSelect');
+			$rootLine = $sysPage->getRootLine($pageId);
+
+				// generate the constants/config + hierarchy info for the template.
+			$template->runThroughTemplates($rootLine);
+			$template->generateConfig();
+
+			$setup = $template->setup;
+		}
+
+		return $setup[$setup['types.'][$typeNum].'.'];
 	}
 
 	/**

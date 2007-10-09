@@ -1,3 +1,7 @@
+2007-10-09 Ingo Renner  <typo3@ingo-renner.com>
+
+	* fixed behaviour on cached feeds
+
 2007-10-07 Ingo Renner  <typo3@ingo-renner.com>
 
 	* initial working code
